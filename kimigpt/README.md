@@ -8,12 +8,12 @@
 
 ## 🎯 What is KimiGPT?
 
-KimiGPT is an advanced Multi-Agent AI System that orchestrates 8 specialized AI agents to generate complete, professional websites from ANY input type - text prompts, images, audio, video, or documents. The system features intelligent API rotation across 6+ free AI providers with automatic failover, real-time preview, and one-click deployment.
+KimiGPT is an advanced Multi-Agent AI System that orchestrates 8 specialized AI agents to generate complete, professional websites from ANY input type - text prompts, images, audio, video, or documents. The system features intelligent API rotation across 5+ free AI providers with automatic failover, real-time preview, and one-click deployment.
 
 ### ✨ Key Features
 
 - **🤖 8 Specialized AI Agents** - Each agent handles a specific aspect of website creation
-- **🔄 Smart API Rotation** - Automatically switches between 6 AI providers for maximum reliability
+- **🔄 Smart API Rotation** - Automatically switches between 5 FREE AI providers for maximum reliability
 - **📱 Fully Responsive** - Websites work perfectly on mobile, tablet, and desktop
 - **⚡ Production Ready** - SEO optimized, accessible (WCAG AA), and performant code
 - **🎨 Multi-Modal Input** - Upload images, videos, audio, documents - we handle it all
@@ -110,18 +110,17 @@ KimiGPT requires at least ONE API key to function. All providers offer generous 
 
 | Provider | Free Tier | Best For | Get Key |
 |----------|-----------|----------|---------|
-| **Groq** | 14,400 req/day | ⚡ Speed | [console.groq.com](https://console.groq.com/) |
+| **Groq** ⭐ | 14,400 req/day | ⚡ Speed (Recommended!) | [console.groq.com](https://console.groq.com/) |
 | **Google Gemini** | 60 req/min | 🎨 Multi-modal | [makersuite.google.com](https://makersuite.google.com/app/apikey) |
-| **Anthropic Claude** | $5 credit | 🧠 Quality | [console.anthropic.com](https://console.anthropic.com/) |
 | **DeepSeek** | Free credits | 💻 Coding | [platform.deepseek.com](https://platform.deepseek.com/) |
 | **OpenRouter** | Free models | 🔄 Variety | [openrouter.ai](https://openrouter.ai/keys) |
 | **Mistral AI** | €5 credit | 🇪🇺 European | [console.mistral.ai](https://console.mistral.ai/) |
 
-2. Add keys to `.env` file:
+2. Add keys to `.env` file (minimum ONE key required):
    ```env
    GROQ_API_KEY=gsk_your_key_here
    GEMINI_API_KEY=AIzaSy_your_key_here
-   ANTHROPIC_API_KEY=sk-ant-your_key_here
+   DEEPSEEK_API_KEY=sk_your_key_here
    ```
 
 3. The system will automatically use the best available API!
@@ -369,7 +368,6 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 Built with:
 - Flask - Web framework
-- Anthropic Claude - AI reasoning
 - Google Gemini - Multi-modal AI
 - Groq - Ultra-fast inference
 - And many more amazing open-source projects

@@ -6,15 +6,15 @@
     "author": "KimiGPT Team"
   },
   "api_providers": {
-    "anthropic": {
-      "name": "Anthropic Claude",
+    "groq": {
+      "name": "Groq",
       "priority": 1,
-      "models": ["claude-3-5-sonnet-20241022", "claude-3-opus-20240229"],
-      "default_model": "claude-3-5-sonnet-20241022",
+      "models": ["llama-3.1-70b-versatile", "mixtral-8x7b-32768"],
+      "default_model": "llama-3.1-70b-versatile",
       "max_tokens": 4096,
       "temperature": 0.7,
-      "rate_limit": 50,
-      "supports": ["text", "image", "code"]
+      "rate_limit": 14400,
+      "supports": ["text", "code"]
     },
     "gemini": {
       "name": "Google Gemini",
@@ -26,19 +26,9 @@
       "rate_limit": 60,
       "supports": ["text", "image", "video", "audio"]
     },
-    "groq": {
-      "name": "Groq",
-      "priority": 3,
-      "models": ["llama-3.1-70b-versatile", "mixtral-8x7b-32768"],
-      "default_model": "llama-3.1-70b-versatile",
-      "max_tokens": 4096,
-      "temperature": 0.7,
-      "rate_limit": 14400,
-      "supports": ["text", "code"]
-    },
     "deepseek": {
       "name": "DeepSeek Coder",
-      "priority": 4,
+      "priority": 3,
       "models": ["deepseek-coder", "deepseek-chat"],
       "default_model": "deepseek-coder",
       "max_tokens": 4096,
@@ -48,8 +38,8 @@
     },
     "openrouter": {
       "name": "OpenRouter",
-      "priority": 5,
-      "models": ["openai/gpt-3.5-turbo", "anthropic/claude-instant-v1"],
+      "priority": 4,
+      "models": ["openai/gpt-3.5-turbo", "meta-llama/llama-3-8b-instruct:free"],
       "default_model": "openai/gpt-3.5-turbo",
       "max_tokens": 4096,
       "temperature": 0.7,
@@ -58,7 +48,7 @@
     },
     "mistral": {
       "name": "Mistral AI",
-      "priority": 6,
+      "priority": 5,
       "models": ["mistral-medium", "mistral-small"],
       "default_model": "mistral-small",
       "max_tokens": 4096,
@@ -71,7 +61,7 @@
     "orchestrator": {
       "name": "Master Orchestrator",
       "description": "Coordinates all agents and manages workflow",
-      "preferred_api": "anthropic"
+      "preferred_api": "groq"
     },
     "understanding": {
       "name": "Understanding Agent",
@@ -81,7 +71,7 @@
     "design": {
       "name": "Design Agent",
       "description": "Creates UI/UX designs and color schemes",
-      "preferred_api": "anthropic"
+      "preferred_api": "gemini"
     },
     "code": {
       "name": "Code Generation Agent",
@@ -96,7 +86,7 @@
     "content": {
       "name": "Content Agent",
       "description": "Generates website content and copy",
-      "preferred_api": "anthropic"
+      "preferred_api": "groq"
     },
     "qa": {
       "name": "Quality Assurance Agent",

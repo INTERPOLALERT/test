@@ -2,104 +2,110 @@
   KIMIGPT - API INTEGRATION GUIDE
 ═══════════════════════════════════════════════════
 
-📍 REQUIRED APIs (Free Tier Available)
+📍 100% FREE APIs (No Credit Card Required!)
 ───────────────────────────────────────────────────
 
-1️⃣ ANTHROPIC CLAUDE API
-   🔗 Get API Key: https://console.anthropic.com/
-   📚 Documentation: https://docs.anthropic.com/
-   💰 Free Tier: $5 credit for new accounts
-   ⚡ Best For: Complex reasoning, code generation
+1️⃣ GROQ API ⭐ RECOMMENDED - START HERE!
+   🔗 Get API Key: https://console.groq.com/
+   📚 Documentation: https://console.groq.com/docs
+   💰 Free Tier: Extremely generous (14,400 req/day) - UNLIMITED!
+   ⚡ Best For: Ultra-fast inference (< 1 second), general purpose
    📝 Setup:
-   - Create account → API Keys → Create Key
-   - Copy key to .env file: ANTHROPIC_API_KEY=sk-ant-xxx
-   - Rate Limit: 50 requests/minute
+   - Sign up (30 seconds, no credit card!)
+   - API Keys → Create
+   - Copy key: GROQ_API_KEY=gsk_xxx
+   - Rate Limit: 14,400 requests/day (240/hour)
 
-2️⃣ GOOGLE GEMINI API
+2️⃣ GOOGLE GEMINI API ⭐ GREAT FOR IMAGES
    🔗 Get API Key: https://makersuite.google.com/app/apikey
    📚 Documentation: https://ai.google.dev/docs
-   💰 Free Tier: 60 requests/minute
+   💰 Free Tier: 60 requests/minute - COMPLETELY FREE!
    ⚡ Best For: Multi-modal (images, video), fast responses
    📝 Setup:
    - Go to Google AI Studio
+   - Sign in with Google (no credit card!)
    - Click "Get API Key" → Create in new project
    - Copy key: GEMINI_API_KEY=AIzaSyxxx
+   - Rate Limit: 60 requests/minute
 
-3️⃣ GROQ API
-   🔗 Get API Key: https://console.groq.com/
-   📚 Documentation: https://console.groq.com/docs
-   💰 Free Tier: Extremely generous (14,400 req/day)
-   ⚡ Best For: Ultra-fast inference (< 1 second)
-   📝 Setup:
-   - Sign up → API Keys → Create
-   - Copy key: GROQ_API_KEY=gsk_xxx
-
-4️⃣ DEEPSEEK CODER API
+3️⃣ DEEPSEEK CODER API
    🔗 Get API Key: https://platform.deepseek.com/
    📚 Documentation: https://platform.deepseek.com/api-docs
    💰 Free Tier: Free credits for new users
-   ⚡ Best For: Code-specific tasks
+   ⚡ Best For: Code-specific tasks, coding assistance
    📝 Setup:
    - Register → API Management → Create Key
    - Copy key: DEEPSEEK_API_KEY=sk-xxx
+   - Rate Limit: 100 requests/minute
 
-5️⃣ OPENROUTER (Multi-Model Gateway)
+4️⃣ OPENROUTER (Multi-Model Gateway)
    🔗 Get API Key: https://openrouter.ai/keys
    📚 Documentation: https://openrouter.ai/docs
-   💰 Free Tier: Access to free models
+   💰 Free Tier: Access to FREE models (Llama, Mistral, etc.)
    ⚡ Best For: Access to 100+ models through one API
    📝 Setup:
    - Sign in with Google → Keys → Create
    - Copy key: OPENROUTER_API_KEY=sk-or-xxx
+   - Use free models: meta-llama/llama-3-8b-instruct:free
+   - Rate Limit: 60 requests/minute
 
-6️⃣ MISTRAL AI API
+5️⃣ MISTRAL AI API
    🔗 Get API Key: https://console.mistral.ai/
    📚 Documentation: https://docs.mistral.ai/
-   💰 Free Tier: €5 credit for new accounts
+   💰 Free Tier: €5 credit for new accounts (lasts long!)
    ⚡ Best For: European data compliance, fast models
    📝 Setup:
    - Create account → API Keys → Generate
    - Copy key: MISTRAL_API_KEY=xxx
+   - Rate Limit: 60 requests/minute
 
 ───────────────────────────────────────────────────
 📍 OPTIONAL ENHANCEMENT APIs
 ───────────────────────────────────────────────────
 
-7️⃣ HUGGING FACE (For Image Generation)
+6️⃣ HUGGING FACE (For Image Generation)
    🔗 Get Token: https://huggingface.co/settings/tokens
    💰 Free Tier: Yes (community models)
    ⚡ Best For: AI image generation for website assets
 
-8️⃣ REPLICATE (Stable Diffusion, etc.)
+7️⃣ REPLICATE (Stable Diffusion, etc.)
    🔗 Get API Key: https://replicate.com/account/api-tokens
-   💰 Free Tier: $0.001-0.01 per generation
+   💰 Free Tier: Limited free generations
    ⚡ Best For: High-quality AI images
 
-9️⃣ CLOUDINARY (Image Hosting & Optimization)
+8️⃣ CLOUDINARY (Image Hosting & Optimization)
    🔗 Get API Key: https://cloudinary.com/users/register/free
    💰 Free Tier: 25GB storage, 25GB bandwidth
    ⚡ Best For: Image CDN and optimization
 
 ───────────────────────────────────────────────────
-🔧 QUICK SETUP INSTRUCTIONS
+🔧 QUICK SETUP INSTRUCTIONS (2 Minutes!)
 ───────────────────────────────────────────────────
 
-1. Get ALL API keys from above links
-2. Run installgpt.bat
-3. Enter API keys when prompted (or add to .env manually)
+MINIMUM REQUIREMENT: Get just ONE API key (we recommend Groq!)
+
+1. Get Groq API key: https://console.groq.com/ (30 seconds!)
+2. Copy .env.example to .env
+3. Add your key: GROQ_API_KEY=gsk_your_key_here
 4. Run startgpt.bat
-5. System will test all APIs and show status
+5. Start generating websites!
+
+RECOMMENDED: Get 2-3 API keys for redundancy
+- Primary: Groq (fastest, most generous)
+- Backup: Gemini (great for images)
+- Extra: DeepSeek (best for code)
 
 ───────────────────────────────────────────────────
 💡 PRO TIPS
 ───────────────────────────────────────────────────
 
-✓ Start with Groq (fastest and most generous free tier)
-✓ Use Claude for complex websites
-✓ Use Gemini for image/video analysis
-✓ OpenRouter gives you backup options
-✓ Monitor your usage in the dashboard
+✓ START WITH GROQ - Easiest and most generous free tier!
+✓ Add Gemini for image/video analysis capabilities
+✓ Use DeepSeek for code generation tasks
+✓ OpenRouter gives you access to many free models
+✓ Add multiple APIs for automatic failover
 ✓ System auto-rotates APIs to maximize free usage
+✓ No credit card needed for Groq or Gemini!
 
 ───────────────────────────────────────────────────
 🔄 API ROTATION LOGIC
@@ -118,21 +124,51 @@ The system automatically:
 📊 API COMPARISON TABLE
 ───────────────────────────────────────────────────
 
-Provider      Speed    Free Tier    Best For
-─────────────────────────────────────────────────
-Groq          ★★★★★   14,400/day   Speed
-Gemini        ★★★★☆   60/min       Multi-modal
-Claude        ★★★★☆   $5 credit    Quality
-DeepSeek      ★★★★☆   Free credits Code
-OpenRouter    ★★★☆☆   Free models  Backup
-Mistral       ★★★★☆   €5 credit    European
+Provider      Speed    Free Tier      Best For          No CC Required
+────────────────────────────────────────────────────────────────────
+Groq          ★★★★★   14,400/day     Speed & General   ✅ YES
+Gemini        ★★★★☆   60/min         Multi-modal       ✅ YES
+DeepSeek      ★★★★☆   Free credits   Code              ✅ YES
+OpenRouter    ★★★☆☆   Free models    Variety           ✅ YES
+Mistral       ★★★★☆   €5 credit      European          ❌ CC for credit
+
+⭐ BEST CHOICE FOR BEGINNERS: Groq + Gemini (both 100% free, no CC!)
+
+───────────────────────────────────────────────────
+❓ FAQ
+───────────────────────────────────────────────────
+
+Q: Which API should I start with?
+A: Groq! It's the fastest, most generous, and requires NO credit card.
+
+Q: How many APIs do I need?
+A: Minimum 1 (Groq). Recommended 2-3 for redundancy.
+
+Q: Do I need a credit card?
+A: NO! Groq and Gemini are completely free with no credit card required.
+
+Q: What if I run out of free tier?
+A: System automatically switches to another API. Add multiple keys!
+
+Q: Which is fastest?
+A: Groq is the fastest (sub-second responses).
+
+Q: Which is best for images?
+A: Google Gemini has the best multi-modal support.
+
+Q: Which is best for code?
+A: DeepSeek Coder is specialized for coding tasks.
+
+Q: How long do free credits last?
+A: Groq and Gemini are truly unlimited free. DeepSeek and Mistral
+   credits last weeks/months depending on usage.
 
 ───────────────────────────────────────────────────
 ❓ TROUBLESHOOTING
 ───────────────────────────────────────────────────
 
 Q: API key not working?
-A: Check if you copied the full key including prefixes (sk-ant-, gsk_, etc.)
+A: Check if you copied the full key including prefixes (gsk_, AIzaSy, etc.)
 
 Q: Rate limit exceeded?
 A: System will auto-switch to another API. Add more API keys for higher limits.
@@ -143,6 +179,9 @@ A: Check internet connection and verify API keys in .env file.
 Q: Slow generation?
 A: Make sure Groq API is configured (fastest provider).
 
+Q: "No API providers available"?
+A: Add at least ONE API key to .env file.
+
 ───────────────────────────────────────────────────
 🆘 SUPPORT
 ───────────────────────────────────────────────────
@@ -151,7 +190,9 @@ If you need help:
 1. Check logs in kimigpt/logs/
 2. Review error messages in console
 3. Verify .env file has correct keys
-4. Test individual APIs using test_apis.py
+4. Test individual APIs: python src/api/test_apis.py
 5. Consult documentation in docs/ folder
 
 ═══════════════════════════════════════════════════
+
+🎉 YOU'RE READY! Start with Groq and begin generating amazing websites!

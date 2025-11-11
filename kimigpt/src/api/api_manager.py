@@ -60,7 +60,6 @@ class APIManager:
 
     def _initialize_providers(self):
         """Initialize all available API providers"""
-        from .claude_api import ClaudeAPI
         from .gemini_api import GeminiAPI
         from .groq_api import GroqAPI
         from .deepseek_api import DeepSeekAPI
@@ -68,15 +67,6 @@ class APIManager:
         from .mistral_api import MistralAPI
 
         # Check which APIs have keys configured
-        if os.getenv("ANTHROPIC_API_KEY"):
-            try:
-                self.providers["anthropic"] = ClaudeAPI()
-                self.api_status["anthropic"] = "available"
-                logger.info("✓ Anthropic Claude API initialized")
-            except Exception as e:
-                logger.warning(f"✗ Anthropic Claude API failed: {e}")
-                self.api_status["anthropic"] = "unavailable"
-
         if os.getenv("GEMINI_API_KEY"):
             try:
                 self.providers["gemini"] = GeminiAPI()
