@@ -67,7 +67,7 @@ Analyze carefully and provide complete JSON."""
         # Get analysis from API
         response = self.api_manager.generate(
             analysis_prompt,
-            preferred_provider="anthropic",
+            preferred_provider="groq",
             task_type="text",
             temperature=0.3
         )

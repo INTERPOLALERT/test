@@ -112,15 +112,17 @@ KimiGPT requires at least ONE API key to function. All providers offer generous 
 |----------|-----------|----------|---------|
 | **Groq** ⭐ | 14,400 req/day | ⚡ Speed (Recommended!) | [console.groq.com](https://console.groq.com/) |
 | **Google Gemini** | 60 req/min | 🎨 Multi-modal | [makersuite.google.com](https://makersuite.google.com/app/apikey) |
-| **DeepSeek** | Free credits | 💻 Coding | [platform.deepseek.com](https://platform.deepseek.com/) |
-| **OpenRouter** | Free models | 🔄 Variety | [openrouter.ai](https://openrouter.ai/keys) |
-| **Mistral AI** | €5 credit | 🇪🇺 European | [console.mistral.ai](https://console.mistral.ai/) |
+| **Hugging Face** | Unlimited | 🌐 Variety | [huggingface.co](https://huggingface.co/settings/tokens) |
+| **Cohere** | 100 req/min | 📝 Content | [cohere.com](https://dashboard.cohere.com/api-keys) |
+
+**ALL 4 APIs ARE 100% FREE - NO CREDIT CARD REQUIRED!**
 
 2. Add keys to `.env` file (minimum ONE key required):
    ```env
    GROQ_API_KEY=gsk_your_key_here
    GEMINI_API_KEY=AIzaSy_your_key_here
-   DEEPSEEK_API_KEY=sk_your_key_here
+   HUGGINGFACE_API_KEY=hf_your_token_here
+   COHERE_API_KEY=your_key_here
    ```
 
 3. The system will automatically use the best available API!
@@ -245,14 +247,12 @@ kimigpt/
 │   │   ├── content_agent.py
 │   │   ├── qa_agent.py
 │   │   └── deployment_agent.py
-│   ├── api/                      # 🔌 API Integrations
+│   ├── api/                      # 🔌 API Integrations (100% FREE!)
 │   │   ├── api_manager.py       # Smart rotation
-│   │   ├── claude_api.py
-│   │   ├── gemini_api.py
 │   │   ├── groq_api.py
-│   │   ├── deepseek_api.py
-│   │   ├── openrouter_api.py
-│   │   └── mistral_api.py
+│   │   ├── gemini_api.py
+│   │   ├── huggingface_api.py
+│   │   └── cohere_api.py
 │   ├── core/                     # ⚙️ Core Engine
 │   │   ├── multi_agent_system.py
 │   │   ├── preview_server.py

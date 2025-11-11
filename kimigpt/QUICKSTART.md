@@ -36,12 +36,20 @@ Choose ONE (or more) of these FREE options:
 4. Copy key starting with "AIzaSy"
 ```
 
-#### Option C: Anthropic Claude (Best Quality) 🧠
+#### Option C: Hugging Face (Unlimited Free) 🌐
 ```
-1. Go to: https://console.anthropic.com/
-2. Sign up ($5 free credit)
-3. Create API Key
-4. Copy key starting with "sk-ant-"
+1. Go to: https://huggingface.co/settings/tokens
+2. Sign up (100% FREE - no credit card!)
+3. Click "New token"
+4. Copy key starting with "hf_"
+```
+
+#### Option D: Cohere (Free Tier) 📝
+```
+1. Go to: https://dashboard.cohere.com/api-keys
+2. Sign up (100% FREE - no credit card!)
+3. Copy the API key
+4. Paste in KimiGPT
 ```
 
 ### Step 4: Configure

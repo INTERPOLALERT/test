@@ -118,7 +118,7 @@ DO NOT include any explanations or markdown. Output ONLY the HTML code."""
 
         response = self.api_manager.generate(
             prompt,
-            preferred_provider="deepseek",
+            preferred_provider="groq",
             task_type="code",
             temperature=0.3,
             max_tokens=4000
@@ -173,7 +173,7 @@ DO NOT include explanations or markdown. Output ONLY CSS code."""
 
         response = self.api_manager.generate(
             prompt,
-            preferred_provider="deepseek",
+            preferred_provider="groq",
             task_type="code",
             temperature=0.3,
             max_tokens=4000
@@ -224,7 +224,7 @@ DO NOT include explanations. Output ONLY JavaScript code."""
 
         response = self.api_manager.generate(
             prompt,
-            preferred_provider="deepseek",
+            preferred_provider="groq",
             task_type="code",
             temperature=0.3,
             max_tokens=3000

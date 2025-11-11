@@ -110,7 +110,7 @@ Create modern, accessible, professional design. Use complementary colors."""
         # Get design from API
         response = self.api_manager.generate(
             prompt,
-            preferred_provider="anthropic",
+            preferred_provider="gemini",
             task_type="text",
             temperature=0.6
         )

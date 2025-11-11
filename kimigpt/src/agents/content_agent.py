@@ -64,7 +64,7 @@ Make content professional, engaging, and SEO-optimized."""
 
         response = self.api_manager.generate(
             prompt,
-            preferred_provider="anthropic",
+            preferred_provider="cohere",
             task_type="text",
             temperature=0.7
         )

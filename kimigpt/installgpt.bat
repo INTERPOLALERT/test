@@ -107,26 +107,24 @@ if exist .env (
 
 echo.
 echo    Please obtain API keys from the services listed in api.txt
+echo    ALL 4 APIS ARE 100%% FREE - NO CREDIT CARD REQUIRED!
 echo    You can skip any API and add it later by editing .env file
 echo    Press ENTER to skip an API key
 echo.
 
-set /p ANTHROPIC_KEY="    Anthropic API Key: "
+set /p GROQ_KEY="    Groq API Key (RECOMMENDED): "
 set /p GEMINI_KEY="    Google Gemini API Key: "
-set /p GROQ_KEY="    Groq API Key: "
-set /p DEEPSEEK_KEY="    DeepSeek API Key: "
-set /p OPENROUTER_KEY="    OpenRouter API Key: "
-set /p MISTRAL_KEY="    Mistral AI API Key: "
+set /p HUGGINGFACE_KEY="    Hugging Face API Key: "
+set /p COHERE_KEY="    Cohere API Key: "
 
 echo # KimiGPT API Configuration > .env
 echo # Generated: %date% %time% >> .env
+echo # All APIs are 100%% FREE - No credit card required! >> .env
 echo. >> .env
-echo ANTHROPIC_API_KEY=%ANTHROPIC_KEY% >> .env
-echo GEMINI_API_KEY=%GEMINI_KEY% >> .env
 echo GROQ_API_KEY=%GROQ_KEY% >> .env
-echo DEEPSEEK_API_KEY=%DEEPSEEK_KEY% >> .env
-echo OPENROUTER_API_KEY=%OPENROUTER_KEY% >> .env
-echo MISTRAL_API_KEY=%MISTRAL_KEY% >> .env
+echo GEMINI_API_KEY=%GEMINI_KEY% >> .env
+echo HUGGINGFACE_API_KEY=%HUGGINGFACE_KEY% >> .env
+echo COHERE_API_KEY=%COHERE_KEY% >> .env
 echo. >> .env
 echo FLASK_ENV=development >> .env
 echo FLASK_PORT=5000 >> .env
