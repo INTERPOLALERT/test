@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Settings - KimiGPT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.5rem; }
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.3); }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+        .alert-success {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+        .alert-warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+        .panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        .panel h2 {
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .api-card {
+            border: 2px solid #e1e8ed;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        .api-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+        .api-card.connected {
+            border-color: #4caf50;
+            background: #f1f8f4;
+        }
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .api-header h3 {
+            font-size: 1.2rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-free {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-connected {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .badge-disconnected {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .api-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        input[type="text"], input[type="password"] {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .btn-success {
+            background: #4caf50;
+            color: white;
+        }
+        .btn-link {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-link:hover {
+            background: #667eea;
+            color: white;
+        }
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        .link-box {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .link-box span {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .link-box a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .link-box a:hover {
+            text-decoration: underline;
+        }
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+        .test-result {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+        .test-result.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        .test-result.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+        .features {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .feature-tag {
+            padding: 0.25rem 0.5rem;
+            background: #e3f2fd;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            color: #1976d2;
+        }
+        .save-all-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚙️ API Settings</h1>
+        <a href="/" class="back-btn">← Back to Dashboard</a>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>📌 100% Free APIs Only!</strong><br>
+            All APIs listed below are completely FREE with NO credit card required. Add at least ONE API key to start generating websites!
+        </div>
+
+        <div id="successMessage" class="alert alert-success" style="display:none;">
+            <strong>✓ Success!</strong> API keys saved successfully. System will now use these APIs.
+        </div>
+
+        <div class="panel">
+            <h2>🔑 Configure Your API Keys</h2>
+
+            <!-- Groq API -->
+            <div class="api-card" id="card-groq">
+                <div class="api-header">
+                    <h3>
+                        ⚡ Groq
+                        <span class="badge badge-free">100% FREE</span>
+                        <span class="badge badge-disconnected" id="status-groq">Not Connected</span>
+                    </h3>
+                </div>
+                <p class="api-description">
+                    Ultra-fast inference (< 1 second). 14,400 requests/day. Best for general purpose & speed.
+                    <strong>RECOMMENDED - Start here!</strong>
+                </p>
+                <div class="features">
+                    <span class="feature-tag">Text Generation</span>
+                    <span class="feature-tag">Code Generation</span>
+                    <span class="feature-tag">14,400 req/day</span>
+                </div>
+                <div class="link-box">
+                    <span>🔗 Get your free API key:</span>
+                    <a href="https://console.groq.com/" target="_blank">console.groq.com →</a>
+                </div>
+                <div class="form-group">
+                    <label for="groq-key">API Key</label>
+                    <div class="input-group">
+                        <input type="password" id="groq-key" placeholder="gsk_your_key_here..." />
+                        <button class="btn btn-secondary btn-small" onclick="toggleKey('groq')">Show</button>
+                    </div>
+                </div>
+                <div class="test-result" id="test-groq"></div>
+                <div class="actions">
+                    <button class="btn btn-primary btn-small" onclick="testAPI('groq')">Test Connection</button>
+                    <button class="btn btn-success btn-small" onclick="saveAPI('groq')">Save</button>
+                </div>
+            </div>
+
+            <!-- Google Gemini API -->
+            <div class="api-card" id="card-gemini">
+                <div class="api-header">
+                    <h3>
+                        🎨 Google Gemini
+                        <span class="badge badge-free">100% FREE</span>
+                        <span class="badge badge-disconnected" id="status-gemini">Not Connected</span>
+                    </h3>
+                </div>
+                <p class="api-description">
+                    Multi-modal AI (text, images, video). 60 requests/minute. Best for image analysis and multi-modal tasks.
+                </p>
+                <div class="features">
+                    <span class="feature-tag">Text Generation</span>
+                    <span class="feature-tag">Image Analysis</span>
+                    <span class="feature-tag">Video Analysis</span>
+                    <span class="feature-tag">60 req/min</span>
+                </div>
+                <div class="link-box">
+                    <span>🔗 Get your free API key:</span>
+                    <a href="https://makersuite.google.com/app/apikey" target="_blank">makersuite.google.com →</a>
+                </div>
+                <div class="form-group">
+                    <label for="gemini-key">API Key</label>
+                    <div class="input-group">
+                        <input type="password" id="gemini-key" placeholder="AIzaSy_your_key_here..." />
+                        <button class="btn btn-secondary btn-small" onclick="toggleKey('gemini')">Show</button>
+                    </div>
+                </div>
+                <div class="test-result" id="test-gemini"></div>
+                <div class="actions">
+                    <button class="btn btn-primary btn-small" onclick="testAPI('gemini')">Test Connection</button>
+                    <button class="btn btn-success btn-small" onclick="saveAPI('gemini')">Save</button>
+                </div>
+            </div>
+
+            <!-- Hugging Face API -->
+            <div class="api-card" id="card-huggingface">
+                <div class="api-header">
+                    <h3>
+                        🤗 Hugging Face
+                        <span class="badge badge-free">100% FREE</span>
+                        <span class="badge badge-disconnected" id="status-huggingface">Not Connected</span>
+                    </h3>
+                </div>
+                <p class="api-description">
+                    Access to thousands of free AI models. Great for text generation and specialized tasks.
+                </p>
+                <div class="features">
+                    <span class="feature-tag">Text Generation</span>
+                    <span class="feature-tag">Code Generation</span>
+                    <span class="feature-tag">Many Models</span>
+                </div>
+                <div class="link-box">
+                    <span>🔗 Get your free API token:</span>
+                    <a href="https://huggingface.co/settings/tokens" target="_blank">huggingface.co/settings/tokens →</a>
+                </div>
+                <div class="form-group">
+                    <label for="huggingface-key">API Token</label>
+                    <div class="input-group">
+                        <input type="password" id="huggingface-key" placeholder="hf_your_token_here..." />
+                        <button class="btn btn-secondary btn-small" onclick="toggleKey('huggingface')">Show</button>
+                    </div>
+                </div>
+                <div class="test-result" id="test-huggingface"></div>
+                <div class="actions">
+                    <button class="btn btn-primary btn-small" onclick="testAPI('huggingface')">Test Connection</button>
+                    <button class="btn btn-success btn-small" onclick="saveAPI('huggingface')">Save</button>
+                </div>
+            </div>
+
+            <!-- Cohere API -->
+            <div class="api-card" id="card-cohere">
+                <div class="api-header">
+                    <h3>
+                        🔷 Cohere
+                        <span class="badge badge-free">FREE TIER</span>
+                        <span class="badge badge-disconnected" id="status-cohere">Not Connected</span>
+                    </h3>
+                </div>
+                <p class="api-description">
+                    Fast text generation with free tier. Good for content creation and text tasks.
+                </p>
+                <div class="features">
+                    <span class="feature-tag">Text Generation</span>
+                    <span class="feature-tag">Fast Responses</span>
+                </div>
+                <div class="link-box">
+                    <span>🔗 Get your free API key:</span>
+                    <a href="https://dashboard.cohere.com/api-keys" target="_blank">dashboard.cohere.com →</a>
+                </div>
+                <div class="form-group">
+                    <label for="cohere-key">API Key</label>
+                    <div class="input-group">
+                        <input type="password" id="cohere-key" placeholder="your_api_key_here..." />
+                        <button class="btn btn-secondary btn-small" onclick="toggleKey('cohere')">Show</button>
+                    </div>
+                </div>
+                <div class="test-result" id="test-cohere"></div>
+                <div class="actions">
+                    <button class="btn btn-primary btn-small" onclick="testAPI('cohere')">Test Connection</button>
+                    <button class="btn btn-success btn-small" onclick="saveAPI('cohere')">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary save-all-btn" onclick="saveAllAPIs()">
+            💾 Save All API Keys
+        </button>
+    </div>
+
+    <script>
+        // Load existing API keys on page load
+        window.addEventListener('load', async () => {
+            try {
+                const response = await fetch('/api/get-api-keys');
+                const data = await response.json();
+
+                // Populate fields and update status
+                ['groq', 'gemini', 'huggingface', 'cohere'].forEach(provider => {
+                    if (data[provider]) {
+                        document.getElementById(`${provider}-key`).value = data[provider];
+                        updateStatus(provider, true);
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading API keys:', error);
+            }
+        });
+
+        function toggleKey(provider) {
+            const input = document.getElementById(`${provider}-key`);
+            const btn = input.nextElementSibling;
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        function updateStatus(provider, connected) {
+            const statusEl = document.getElementById(`status-${provider}`);
+            const cardEl = document.getElementById(`card-${provider}`);
+
+            if (connected) {
+                statusEl.textContent = 'Connected';
+                statusEl.className = 'badge badge-connected';
+                cardEl.classList.add('connected');
+            } else {
+                statusEl.textContent = 'Not Connected';
+                statusEl.className = 'badge badge-disconnected';
+                cardEl.classList.remove('connected');
+            }
+        }
+
+        async function testAPI(provider) {
+            const key = document.getElementById(`${provider}-key`).value;
+            const testResult = document.getElementById(`test-${provider}`);
+
+            if (!key) {
+                testResult.className = 'test-result error';
+                testResult.textContent = '✗ Please enter an API key first';
+                return;
+            }
+
+            testResult.textContent = '⏳ Testing connection...';
+            testResult.className = 'test-result';
+            testResult.style.display = 'block';
+
+            try {
+                const response = await fetch('/api/test-api-key', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ provider, api_key: key })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    testResult.className = 'test-result success';
+                    testResult.textContent = '✓ Connection successful!';
+                    updateStatus(provider, true);
+                } else {
+                    testResult.className = 'test-result error';
+                    testResult.textContent = `✗ ${data.error || 'Connection failed'}`;
+                }
+            } catch (error) {
+                testResult.className = 'test-result error';
+                testResult.textContent = '✗ Test failed: ' + error.message;
+            }
+        }
+
+        async function saveAPI(provider) {
+            const key = document.getElementById(`${provider}-key`).value;
+
+            if (!key) {
+                alert('Please enter an API key');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/save-api-key', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ provider, api_key: key })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    updateStatus(provider, true);
+                    showSuccess();
+                } else {
+                    alert('Failed to save: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Save failed: ' + error.message);
+            }
+        }
+
+        async function saveAllAPIs() {
+            const apis = {};
+            let hasKey = false;
+
+            ['groq', 'gemini', 'huggingface', 'cohere'].forEach(provider => {
+                const key = document.getElementById(`${provider}-key`).value;
+                if (key) {
+                    apis[provider] = key;
+                    hasKey = true;
+                }
+            });
+
+            if (!hasKey) {
+                alert('Please enter at least one API key');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/save-all-api-keys', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ apis })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    Object.keys(apis).forEach(provider => updateStatus(provider, true));
+                    showSuccess();
+                } else {
+                    alert('Failed to save: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                alert('Save failed: ' + error.message);
+            }
+        }
+
+        function showSuccess() {
+            const msg = document.getElementById('successMessage');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

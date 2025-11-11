@@ -243,6 +243,181 @@ def api_test_apis():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api-settings')
+def api_settings_page():
+    """API Settings page"""
+    return render_template('api_settings.html')
+
+
+@app.route('/api/get-api-keys')
+def get_api_keys():
+    """Get currently configured API keys (masked)"""
+    try:
+        env_path = '.env'
+        keys = {}
+
+        if os.path.exists(env_path):
+            with open(env_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if '=' in line and not line.startswith('#'):
+                        key, value = line.split('=', 1)
+                        if 'API_KEY' in key and value:
+                            provider = key.replace('_API_KEY', '').lower()
+                            # Mask the key (show first/last 4 chars)
+                            if len(value) > 8:
+                                keys[provider] = value[:4] + '...' + value[-4:]
+                            else:
+                                keys[provider] = value
+
+        return jsonify(keys)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/test-api-key', methods=['POST'])
+def test_api_key():
+    """Test a single API key"""
+    try:
+        data = request.json
+        provider = data.get('provider')
+        api_key = data.get('api_key')
+
+        if not provider or not api_key:
+            return jsonify({'success': False, 'error': 'Provider and API key required'}), 400
+
+        # Temporarily set the API key
+        env_var = f"{provider.upper()}_API_KEY"
+        old_value = os.getenv(env_var)
+        os.environ[env_var] = api_key
+
+        # Test the API
+        try:
+            # Reinitialize API manager to pick up new key
+            from src.api.api_manager import APIManager
+            test_manager = APIManager()
+
+            if provider in test_manager.providers:
+                # Simple test prompt
+                test_response = test_manager.generate(
+                    "Say 'OK' if this is working",
+                    preferred_provider=provider,
+                    use_cache=False,
+                    max_retries=1
+                )
+
+                if test_response.get('success'):
+                    return jsonify({'success': True, 'message': 'Connection successful'})
+                else:
+                    return jsonify({'success': False, 'error': 'API test failed'})
+            else:
+                return jsonify({'success': False, 'error': f'Provider {provider} not found'})
+
+        finally:
+            # Restore old value
+            if old_value:
+                os.environ[env_var] = old_value
+            elif env_var in os.environ:
+                del os.environ[env_var]
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/save-api-key', methods=['POST'])
+def save_api_key():
+    """Save a single API key to .env file"""
+    try:
+        data = request.json
+        provider = data.get('provider')
+        api_key = data.get('api_key')
+
+        if not provider or not api_key:
+            return jsonify({'success': False, 'error': 'Provider and API key required'}), 400
+
+        env_var = f"{provider.upper()}_API_KEY"
+        env_path = '.env'
+
+        # Read existing .env
+        lines = []
+        key_exists = False
+
+        if os.path.exists(env_path):
+            with open(env_path, 'r') as f:
+                lines = f.readlines()
+
+            # Update existing key
+            for i, line in enumerate(lines):
+                if line.strip().startswith(env_var + '='):
+                    lines[i] = f"{env_var}={api_key}\n"
+                    key_exists = True
+                    break
+
+        # Add new key if not exists
+        if not key_exists:
+            lines.append(f"\n{env_var}={api_key}\n")
+
+        # Write back to .env
+        with open(env_path, 'w') as f:
+            f.writelines(lines)
+
+        # Update environment variable
+        os.environ[env_var] = api_key
+
+        return jsonify({'success': True, 'message': 'API key saved successfully'})
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/save-all-api-keys', methods=['POST'])
+def save_all_api_keys():
+    """Save multiple API keys at once"""
+    try:
+        data = request.json
+        apis = data.get('apis', {})
+
+        if not apis:
+            return jsonify({'success': False, 'error': 'No API keys provided'}), 400
+
+        env_path = '.env'
+
+        # Read existing .env
+        lines = []
+        if os.path.exists(env_path):
+            with open(env_path, 'r') as f:
+                lines = f.readlines()
+
+        # Update or add keys
+        for provider, api_key in apis.items():
+            env_var = f"{provider.upper()}_API_KEY"
+            key_exists = False
+
+            # Update existing key
+            for i, line in enumerate(lines):
+                if line.strip().startswith(env_var + '='):
+                    lines[i] = f"{env_var}={api_key}\n"
+                    key_exists = True
+                    break
+
+            # Add new key if not exists
+            if not key_exists:
+                lines.append(f"\n{env_var}={api_key}\n")
+
+            # Update environment variable
+            os.environ[env_var] = api_key
+
+        # Write back to .env
+        with open(env_path, 'w') as f:
+            f.writelines(lines)
+
+        return jsonify({'success': True, 'message': 'All API keys saved successfully'})
+
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({'error': 'Not found'}), 404

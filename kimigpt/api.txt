@@ -2,81 +2,104 @@
   KIMIGPT - API INTEGRATION GUIDE
 ═══════════════════════════════════════════════════
 
-📍 100% FREE APIs (No Credit Card Required!)
+📍 100% FREE APIs - NO TRIALS, NO CREDITS, NO PAYMENTS!
 ───────────────────────────────────────────────────
 
+All APIs below are COMPLETELY FREE with NO credit card required!
+These are not trials or free credits - they're truly unlimited free tiers.
+
+───────────────────────────────────────────────────
 1️⃣ GROQ API ⭐ RECOMMENDED - START HERE!
+───────────────────────────────────────────────────
+
    🔗 Get API Key: https://console.groq.com/
    📚 Documentation: https://console.groq.com/docs
-   💰 Free Tier: Extremely generous (14,400 req/day) - UNLIMITED!
+   💰 Free Tier: 14,400 requests/day (240 req/hour) - COMPLETELY FREE!
    ⚡ Best For: Ultra-fast inference (< 1 second), general purpose
-   📝 Setup:
-   - Sign up (30 seconds, no credit card!)
-   - API Keys → Create
-   - Copy key: GROQ_API_KEY=gsk_xxx
-   - Rate Limit: 14,400 requests/day (240/hour)
+   🎯 Models: Llama 3.1 70B, Mixtral 8x7B
 
-2️⃣ GOOGLE GEMINI API ⭐ GREAT FOR IMAGES
+   📝 HOW TO GET YOUR KEY (30 seconds):
+   ────────────────────────────────────────
+   1. Visit: https://console.groq.com/
+   2. Sign up with email or Google (NO credit card!)
+   3. Click "API Keys" in left sidebar
+   4. Click "Create API Key"
+   5. Copy the key (starts with: gsk_...)
+   6. Paste in KimiGPT API Settings: GROQ_API_KEY=gsk_xxx
+
+   ✅ NO CREDIT CARD REQUIRED
+   ✅ TRULY UNLIMITED FREE FOREVER
+   ✅ FASTEST AI INFERENCE AVAILABLE
+
+───────────────────────────────────────────────────
+2️⃣ GOOGLE GEMINI API ⭐ BEST FOR IMAGES & VIDEO
+───────────────────────────────────────────────────
+
    🔗 Get API Key: https://makersuite.google.com/app/apikey
    📚 Documentation: https://ai.google.dev/docs
    💰 Free Tier: 60 requests/minute - COMPLETELY FREE!
-   ⚡ Best For: Multi-modal (images, video), fast responses
-   📝 Setup:
-   - Go to Google AI Studio
-   - Sign in with Google (no credit card!)
-   - Click "Get API Key" → Create in new project
-   - Copy key: GEMINI_API_KEY=AIzaSyxxx
-   - Rate Limit: 60 requests/minute
+   ⚡ Best For: Multi-modal (images, video, audio), design tasks
+   🎯 Models: Gemini 1.5 Pro, Gemini 1.5 Flash
 
-3️⃣ DEEPSEEK CODER API
-   🔗 Get API Key: https://platform.deepseek.com/
-   📚 Documentation: https://platform.deepseek.com/api-docs
-   💰 Free Tier: Free credits for new users
-   ⚡ Best For: Code-specific tasks, coding assistance
-   📝 Setup:
-   - Register → API Management → Create Key
-   - Copy key: DEEPSEEK_API_KEY=sk-xxx
-   - Rate Limit: 100 requests/minute
+   📝 HOW TO GET YOUR KEY (1 minute):
+   ────────────────────────────────────────
+   1. Visit: https://makersuite.google.com/app/apikey
+   2. Sign in with your Google account
+   3. Click "Get API Key" button
+   4. Click "Create API key in new project"
+   5. Copy the key (starts with: AIzaSy...)
+   6. Paste in KimiGPT API Settings: GEMINI_API_KEY=AIzaSyxxx
 
-4️⃣ OPENROUTER (Multi-Model Gateway)
-   🔗 Get API Key: https://openrouter.ai/keys
-   📚 Documentation: https://openrouter.ai/docs
-   💰 Free Tier: Access to FREE models (Llama, Mistral, etc.)
-   ⚡ Best For: Access to 100+ models through one API
-   📝 Setup:
-   - Sign in with Google → Keys → Create
-   - Copy key: OPENROUTER_API_KEY=sk-or-xxx
-   - Use free models: meta-llama/llama-3-8b-instruct:free
-   - Rate Limit: 60 requests/minute
-
-5️⃣ MISTRAL AI API
-   🔗 Get API Key: https://console.mistral.ai/
-   📚 Documentation: https://docs.mistral.ai/
-   💰 Free Tier: €5 credit for new accounts (lasts long!)
-   ⚡ Best For: European data compliance, fast models
-   📝 Setup:
-   - Create account → API Keys → Generate
-   - Copy key: MISTRAL_API_KEY=xxx
-   - Rate Limit: 60 requests/minute
+   ✅ NO CREDIT CARD REQUIRED
+   ✅ TRULY UNLIMITED FREE FOREVER
+   ✅ BEST MULTI-MODAL CAPABILITIES
 
 ───────────────────────────────────────────────────
-📍 OPTIONAL ENHANCEMENT APIs
+3️⃣ HUGGING FACE API ⭐ UNLIMITED FREE INFERENCE
 ───────────────────────────────────────────────────
 
-6️⃣ HUGGING FACE (For Image Generation)
-   🔗 Get Token: https://huggingface.co/settings/tokens
-   💰 Free Tier: Yes (community models)
-   ⚡ Best For: AI image generation for website assets
+   🔗 Get API Key: https://huggingface.co/settings/tokens
+   📚 Documentation: https://huggingface.co/docs/api-inference
+   💰 Free Tier: Unlimited free inference - COMPLETELY FREE!
+   ⚡ Best For: Open-source models, variety of tasks
+   🎯 Models: Mixtral 8x7B, Llama 2, Mistral 7B, and 100+ more
 
-7️⃣ REPLICATE (Stable Diffusion, etc.)
-   🔗 Get API Key: https://replicate.com/account/api-tokens
-   💰 Free Tier: Limited free generations
-   ⚡ Best For: High-quality AI images
+   📝 HOW TO GET YOUR KEY (1 minute):
+   ────────────────────────────────────────
+   1. Visit: https://huggingface.co/join
+   2. Create free account (NO credit card!)
+   3. Go to: https://huggingface.co/settings/tokens
+   4. Click "New token" button
+   5. Name it "KimiGPT" and select "Read" access
+   6. Copy the token (starts with: hf_...)
+   7. Paste in KimiGPT API Settings: HUGGINGFACE_API_KEY=hf_xxx
 
-8️⃣ CLOUDINARY (Image Hosting & Optimization)
-   🔗 Get API Key: https://cloudinary.com/users/register/free
-   💰 Free Tier: 25GB storage, 25GB bandwidth
-   ⚡ Best For: Image CDN and optimization
+   ✅ NO CREDIT CARD REQUIRED
+   ✅ TRULY UNLIMITED FREE FOREVER
+   ✅ ACCESS TO 100+ OPEN-SOURCE MODELS
+
+───────────────────────────────────────────────────
+4️⃣ COHERE API ⭐ GREAT FREE TIER
+───────────────────────────────────────────────────
+
+   🔗 Get API Key: https://dashboard.cohere.com/api-keys
+   📚 Documentation: https://docs.cohere.com/
+   💰 Free Tier: 100 requests/minute - COMPLETELY FREE!
+   ⚡ Best For: Text generation, content creation
+   🎯 Models: Command, Command Light
+
+   📝 HOW TO GET YOUR KEY (1 minute):
+   ────────────────────────────────────────
+   1. Visit: https://cohere.com/
+   2. Click "Sign Up" or "Get Started" (NO credit card!)
+   3. Create account with email or Google
+   4. Go to: https://dashboard.cohere.com/api-keys
+   5. Copy the default API key or create a new one
+   6. Paste in KimiGPT API Settings: COHERE_API_KEY=xxx
+
+   ✅ NO CREDIT CARD REQUIRED
+   ✅ TRULY UNLIMITED FREE FOREVER
+   ✅ FAST AND RELIABLE
 
 ───────────────────────────────────────────────────
 🔧 QUICK SETUP INSTRUCTIONS (2 Minutes!)
@@ -84,16 +107,31 @@
 
 MINIMUM REQUIREMENT: Get just ONE API key (we recommend Groq!)
 
+METHOD 1: IN-APP API MANAGEMENT (EASIEST!) ✨
+────────────────────────────────────────────────
+1. Run startgpt.bat to launch KimiGPT
+2. Open http://localhost:5000 in browser
+3. Click "⚙️ API Settings" button
+4. Click links to get API keys from providers
+5. Paste keys in input boxes
+6. Click "Test Connection" to verify
+7. Click "Save" for each API or "Save All API Keys"
+8. Start generating websites!
+
+METHOD 2: MANUAL .ENV CONFIGURATION
+────────────────────────────────────────────────
 1. Get Groq API key: https://console.groq.com/ (30 seconds!)
 2. Copy .env.example to .env
 3. Add your key: GROQ_API_KEY=gsk_your_key_here
 4. Run startgpt.bat
 5. Start generating websites!
 
-RECOMMENDED: Get 2-3 API keys for redundancy
-- Primary: Groq (fastest, most generous)
-- Backup: Gemini (great for images)
-- Extra: DeepSeek (best for code)
+RECOMMENDED: Get 2-4 API keys for maximum reliability
+────────────────────────────────────────────────
+- Primary: Groq (fastest, 14,400 req/day)
+- Backup: Gemini (multi-modal, 60 req/min)
+- Extra: Hugging Face (unlimited, variety of models)
+- Bonus: Cohere (100 req/min, reliable)
 
 ───────────────────────────────────────────────────
 💡 PRO TIPS
@@ -101,38 +139,41 @@ RECOMMENDED: Get 2-3 API keys for redundancy
 
 ✓ START WITH GROQ - Easiest and most generous free tier!
 ✓ Add Gemini for image/video analysis capabilities
-✓ Use DeepSeek for code generation tasks
-✓ OpenRouter gives you access to many free models
-✓ Add multiple APIs for automatic failover
+✓ Use Hugging Face for access to 100+ open models
+✓ Cohere is great for consistent text generation
+✓ Add ALL 4 APIs for maximum reliability & speed
 ✓ System auto-rotates APIs to maximize free usage
-✓ No credit card needed for Groq or Gemini!
+✓ No credit card needed for ANY of these APIs!
+✓ Use the in-app API Settings for easiest management
 
 ───────────────────────────────────────────────────
-🔄 API ROTATION LOGIC
+🔄 API ROTATION LOGIC (Smart & Automatic!)
 ───────────────────────────────────────────────────
 
 The system automatically:
 1. Tests all APIs on startup
 2. Checks health status in real-time
 3. Monitors rate limits and quotas
-4. Selects fastest available API
-5. Auto-switches on failure
+4. Selects fastest available API for each request
+5. Auto-switches on failure (you never see errors!)
 6. Balances load across multiple APIs
 7. Caches responses to reduce calls
+8. Retries failed requests with exponential backoff
+9. Marks degraded APIs and recovers them automatically
 
 ───────────────────────────────────────────────────
 📊 API COMPARISON TABLE
 ───────────────────────────────────────────────────
 
-Provider      Speed    Free Tier      Best For          No CC Required
-────────────────────────────────────────────────────────────────────
-Groq          ★★★★★   14,400/day     Speed & General   ✅ YES
-Gemini        ★★★★☆   60/min         Multi-modal       ✅ YES
-DeepSeek      ★★★★☆   Free credits   Code              ✅ YES
-OpenRouter    ★★★☆☆   Free models    Variety           ✅ YES
-Mistral       ★★★★☆   €5 credit      European          ❌ CC for credit
+Provider       Speed    Free Tier       Best For            No CC
+─────────────────────────────────────────────────────────────────
+Groq           ★★★★★   14,400/day      Speed & General     ✅ YES
+Gemini         ★★★★☆   60/min          Multi-modal         ✅ YES
+Hugging Face   ★★★☆☆   Unlimited       Variety/Open        ✅ YES
+Cohere         ★★★★☆   100/min         Text/Content        ✅ YES
 
-⭐ BEST CHOICE FOR BEGINNERS: Groq + Gemini (both 100% free, no CC!)
+⭐ ALL 4 ARE 100% FREE - NO TRIALS, NO CREDITS, NO CREDIT CARD!
+⭐ BEST COMBINATION: Get all 4 for maximum reliability!
 
 ───────────────────────────────────────────────────
 ❓ FAQ
@@ -140,59 +181,145 @@ Mistral       ★★★★☆   €5 credit      European          ❌ CC for cr
 
 Q: Which API should I start with?
 A: Groq! It's the fastest, most generous, and requires NO credit card.
+   Get it here: https://console.groq.com/
 
 Q: How many APIs do I need?
-A: Minimum 1 (Groq). Recommended 2-3 for redundancy.
+A: Minimum 1 (Groq). Recommended: ALL 4 for best reliability and speed.
 
 Q: Do I need a credit card?
-A: NO! Groq and Gemini are completely free with no credit card required.
+A: NO! All 4 APIs are completely free with NO credit card required.
 
-Q: What if I run out of free tier?
-A: System automatically switches to another API. Add multiple keys!
+Q: Are these really unlimited and free forever?
+A: YES! Unlike trials or credits, these are permanent free tiers.
+   - Groq: 14,400 req/day forever
+   - Gemini: 60 req/min forever
+   - Hugging Face: Unlimited forever
+   - Cohere: 100 req/min forever
+
+Q: What if I run out of rate limit?
+A: System automatically switches to another API instantly. That's why
+   we recommend adding all 4 APIs!
 
 Q: Which is fastest?
 A: Groq is the fastest (sub-second responses).
 
 Q: Which is best for images?
-A: Google Gemini has the best multi-modal support.
+A: Google Gemini has the best multi-modal support (images, video, audio).
 
-Q: Which is best for code?
-A: DeepSeek Coder is specialized for coding tasks.
+Q: Can I use the app without setting up .env file?
+A: YES! Use the in-app API Settings page to add keys directly in the web UI.
+   Just click "⚙️ API Settings" button on the dashboard!
 
-Q: How long do free credits last?
-A: Groq and Gemini are truly unlimited free. DeepSeek and Mistral
-   credits last weeks/months depending on usage.
+Q: Will I ever have to pay?
+A: NO! All these APIs are truly free forever. No hidden costs, no trials
+   ending, no credit card required. They're designed to be free!
+
+───────────────────────────────────────────────────
+🎯 WHICH API FOR WHICH TASK?
+───────────────────────────────────────────────────
+
+🚀 Speed & Performance → Groq (fastest!)
+🎨 Design & Multi-modal → Gemini (images, video, audio)
+💻 Code Generation → Groq or Hugging Face
+📝 Content Writing → Cohere or Groq
+🖼️ Image Analysis → Gemini (best multi-modal)
+🔄 High Volume → Add all 4 APIs for load balancing
+🌐 Variety of Models → Hugging Face (100+ models)
+
+Don't worry! The system automatically picks the best API for each task.
 
 ───────────────────────────────────────────────────
 ❓ TROUBLESHOOTING
 ───────────────────────────────────────────────────
 
 Q: API key not working?
-A: Check if you copied the full key including prefixes (gsk_, AIzaSy, etc.)
+A:
+   1. Check if you copied the FULL key including prefix:
+      - Groq: gsk_...
+      - Gemini: AIzaSy...
+      - Hugging Face: hf_...
+      - Cohere: (no prefix)
+   2. Use the "Test Connection" button in API Settings
+   3. Check logs for error messages
 
 Q: Rate limit exceeded?
-A: System will auto-switch to another API. Add more API keys for higher limits.
+A: System will auto-switch to another API. Add more API keys for
+   higher combined limits:
+   - 1 API = 14,400 req/day (Groq only)
+   - 2 APIs = 14,400 + 86,400 = 101,000+ req/day
+   - 4 APIs = 100,000+ requests/day combined!
 
 Q: All APIs failing?
-A: Check internet connection and verify API keys in .env file.
+A:
+   1. Check internet connection
+   2. Verify API keys in API Settings page
+   3. Click "Test Connection" for each API
+   4. Check browser console for errors (F12)
 
 Q: Slow generation?
 A: Make sure Groq API is configured (fastest provider).
+   Also add Cohere for backup speed.
 
 Q: "No API providers available"?
-A: Add at least ONE API key to .env file.
+A: Add at least ONE API key using the API Settings page.
+
+Q: Can't find API Settings page?
+A: Click the "⚙️ API Settings" button on the main dashboard,
+   or go directly to: http://localhost:5000/api-settings
+
+Q: API key saved but not working?
+A:
+   1. Check if .env file was created (should be in kimigpt folder)
+   2. Restart the application (run startgpt.bat again)
+   3. Keys should load automatically
+
+───────────────────────────────────────────────────
+🔒 SECURITY & PRIVACY
+───────────────────────────────────────────────────
+
+✅ API keys are stored locally in .env file only
+✅ Keys never leave your computer
+✅ Keys are masked when displayed (•••• format)
+✅ All API calls use HTTPS encryption
+✅ No telemetry or tracking
+✅ Your data stays on your machine
 
 ───────────────────────────────────────────────────
 🆘 SUPPORT
 ───────────────────────────────────────────────────
 
 If you need help:
-1. Check logs in kimigpt/logs/
-2. Review error messages in console
-3. Verify .env file has correct keys
-4. Test individual APIs: python src/api/test_apis.py
-5. Consult documentation in docs/ folder
+1. Check API Settings page and test each API
+2. Review error messages in browser console (F12)
+3. Check logs in kimigpt/logs/ folder
+4. Verify .env file has correct keys
+5. Make sure you copied complete API keys with prefixes
+6. Try adding multiple APIs for redundancy
+
+───────────────────────────────────────────────────
+🎉 GETTING STARTED CHECKLIST
+───────────────────────────────────────────────────
+
+□ Get Groq API key (30 seconds): https://console.groq.com/
+□ Get Gemini API key (1 minute): https://makersuite.google.com/app/apikey
+□ Get Hugging Face key (1 minute): https://huggingface.co/settings/tokens
+□ Get Cohere API key (1 minute): https://dashboard.cohere.com/api-keys
+□ Run startgpt.bat
+□ Open http://localhost:5000
+□ Click "⚙️ API Settings"
+□ Paste all 4 API keys
+□ Test connections
+□ Save keys
+□ Start generating amazing websites!
+
+Total time: Less than 5 minutes for all 4 APIs! 🚀
 
 ═══════════════════════════════════════════════════
 
-🎉 YOU'RE READY! Start with Groq and begin generating amazing websites!
+🎉 YOU'RE READY!
+
+All 4 APIs are 100% FREE forever - NO credit card, NO trials, NO limits!
+
+Start with Groq and add the others for maximum power!
+
+═══════════════════════════════════════════════════

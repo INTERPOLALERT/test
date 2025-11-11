@@ -59,58 +59,49 @@ class APIManager:
             return {}
 
     def _initialize_providers(self):
-        """Initialize all available API providers"""
+        """Initialize all available API providers - 100% FREE ONLY!"""
         from .gemini_api import GeminiAPI
         from .groq_api import GroqAPI
-        from .deepseek_api import DeepSeekAPI
-        from .openrouter_api import OpenRouterAPI
-        from .mistral_api import MistralAPI
+        from .huggingface_api import HuggingFaceAPI
+        from .cohere_api import CohereAPI
 
-        # Check which APIs have keys configured
-        if os.getenv("GEMINI_API_KEY"):
-            try:
-                self.providers["gemini"] = GeminiAPI()
-                self.api_status["gemini"] = "available"
-                logger.info("✓ Google Gemini API initialized")
-            except Exception as e:
-                logger.warning(f"✗ Google Gemini API failed: {e}")
-                self.api_status["gemini"] = "unavailable"
+        # Only 100% free APIs (no trials, no credits, no payments!)
 
         if os.getenv("GROQ_API_KEY"):
             try:
                 self.providers["groq"] = GroqAPI()
                 self.api_status["groq"] = "available"
-                logger.info("✓ Groq API initialized")
+                logger.info("✓ Groq API initialized (FREE)")
             except Exception as e:
                 logger.warning(f"✗ Groq API failed: {e}")
                 self.api_status["groq"] = "unavailable"
 
-        if os.getenv("DEEPSEEK_API_KEY"):
+        if os.getenv("GEMINI_API_KEY"):
             try:
-                self.providers["deepseek"] = DeepSeekAPI()
-                self.api_status["deepseek"] = "available"
-                logger.info("✓ DeepSeek API initialized")
+                self.providers["gemini"] = GeminiAPI()
+                self.api_status["gemini"] = "available"
+                logger.info("✓ Google Gemini API initialized (FREE)")
             except Exception as e:
-                logger.warning(f"✗ DeepSeek API failed: {e}")
-                self.api_status["deepseek"] = "unavailable"
+                logger.warning(f"✗ Google Gemini API failed: {e}")
+                self.api_status["gemini"] = "unavailable"
 
-        if os.getenv("OPENROUTER_API_KEY"):
+        if os.getenv("HUGGINGFACE_API_KEY"):
             try:
-                self.providers["openrouter"] = OpenRouterAPI()
-                self.api_status["openrouter"] = "available"
-                logger.info("✓ OpenRouter API initialized")
+                self.providers["huggingface"] = HuggingFaceAPI()
+                self.api_status["huggingface"] = "available"
+                logger.info("✓ Hugging Face API initialized (FREE)")
             except Exception as e:
-                logger.warning(f"✗ OpenRouter API failed: {e}")
-                self.api_status["openrouter"] = "unavailable"
+                logger.warning(f"✗ Hugging Face API failed: {e}")
+                self.api_status["huggingface"] = "unavailable"
 
-        if os.getenv("MISTRAL_API_KEY"):
+        if os.getenv("COHERE_API_KEY"):
             try:
-                self.providers["mistral"] = MistralAPI()
-                self.api_status["mistral"] = "available"
-                logger.info("✓ Mistral AI API initialized")
+                self.providers["cohere"] = CohereAPI()
+                self.api_status["cohere"] = "available"
+                logger.info("✓ Cohere API initialized (FREE)")
             except Exception as e:
-                logger.warning(f"✗ Mistral AI API failed: {e}")
-                self.api_status["mistral"] = "unavailable"
+                logger.warning(f"✗ Cohere API failed: {e}")
+                self.api_status["cohere"] = "unavailable"
 
         if not self.providers:
             logger.error("⚠️ No API providers configured! Please add API keys to .env file")

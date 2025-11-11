@@ -14,7 +14,9 @@
       "max_tokens": 4096,
       "temperature": 0.7,
       "rate_limit": 14400,
-      "supports": ["text", "code"]
+      "supports": ["text", "code"],
+      "free": true,
+      "no_credit_card": true
     },
     "gemini": {
       "name": "Google Gemini",
@@ -24,37 +26,33 @@
       "max_tokens": 8192,
       "temperature": 0.7,
       "rate_limit": 60,
-      "supports": ["text", "image", "video", "audio"]
+      "supports": ["text", "image", "video", "audio"],
+      "free": true,
+      "no_credit_card": true
     },
-    "deepseek": {
-      "name": "DeepSeek Coder",
+    "huggingface": {
+      "name": "Hugging Face",
       "priority": 3,
-      "models": ["deepseek-coder", "deepseek-chat"],
-      "default_model": "deepseek-coder",
-      "max_tokens": 4096,
+      "models": ["mistralai/Mixtral-8x7B-Instruct-v0.1"],
+      "default_model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      "max_tokens": 2048,
       "temperature": 0.7,
       "rate_limit": 100,
-      "supports": ["code"]
+      "supports": ["text", "code"],
+      "free": true,
+      "no_credit_card": true
     },
-    "openrouter": {
-      "name": "OpenRouter",
+    "cohere": {
+      "name": "Cohere",
       "priority": 4,
-      "models": ["openai/gpt-3.5-turbo", "meta-llama/llama-3-8b-instruct:free"],
-      "default_model": "openai/gpt-3.5-turbo",
-      "max_tokens": 4096,
+      "models": ["command", "command-light"],
+      "default_model": "command",
+      "max_tokens": 2048,
       "temperature": 0.7,
-      "rate_limit": 60,
-      "supports": ["text", "code"]
-    },
-    "mistral": {
-      "name": "Mistral AI",
-      "priority": 5,
-      "models": ["mistral-medium", "mistral-small"],
-      "default_model": "mistral-small",
-      "max_tokens": 4096,
-      "temperature": 0.7,
-      "rate_limit": 60,
-      "supports": ["text", "code"]
+      "rate_limit": 100,
+      "supports": ["text"],
+      "free": true,
+      "no_credit_card": true
     }
   },
   "agents": {
@@ -76,7 +74,7 @@
     "code": {
       "name": "Code Generation Agent",
       "description": "Generates HTML/CSS/JavaScript code",
-      "preferred_api": "deepseek"
+      "preferred_api": "groq"
     },
     "image": {
       "name": "Image Processing Agent",
