@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Website - KimiGPT</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.5rem; }
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.3); }
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .panel {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .panel h2 {
+            margin-bottom: 1.5rem;
+            color: #667eea;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 150px;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .file-upload {
+            border: 2px dashed #e1e8ed;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .file-upload:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+        .file-upload input {
+            display: none;
+        }
+        .uploaded-files {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .file-tag {
+            padding: 0.5rem 1rem;
+            background: #e7f3ff;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .progress {
+            display: none;
+            margin-top: 1rem;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e1e8ed;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            animation: progress 2s ease-in-out infinite;
+        }
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .preview {
+            height: 70vh;
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            position: relative;
+            overflow: hidden;
+        }
+        .preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
+        }
+        .preview-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        .device-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .device-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .result-actions {
+            display: none;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .result-actions.show {
+            display: flex;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🤖 KimiGPT - Generate Website</h1>
+        <a href="/" class="back-btn">← Back to Dashboard</a>
+    </div>
+
+    <div class="container">
+        <div class="panel">
+            <h2>📝 Input</h2>
+
+            <form id="generateForm">
+                <div class="form-group">
+                    <label for="prompt">Describe your website:</label>
+                    <textarea id="prompt" name="prompt" placeholder="Example: Create a modern portfolio website for a photographer with dark theme, smooth animations, and a gallery section..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Files (optional):</label>
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <p>📎 Click to upload images, videos, or documents</p>
+                        <p style="font-size: 0.9rem; color: #999; margin-top: 0.5rem;">Supported: JPG, PNG, GIF, MP4, PDF, DOCX (Max 50MB)</p>
+                        <input type="file" id="fileInput" multiple accept="image/*,video/*,.pdf,.docx,.txt">
+                    </div>
+                    <div class="uploaded-files" id="uploadedFiles"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="generateBtn">
+                    🚀 Generate Website
+                </button>
+
+                <div class="progress" id="progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="status" id="status">Initializing...</div>
+                </div>
+
+                <div class="result-actions" id="resultActions">
+                    <button type="button" class="btn btn-primary" onclick="downloadWebsite()">
+                        📦 Download ZIP
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="panel">
+            <h2>👁️ Preview</h2>
+            <div class="preview" id="preview">
+                <p>Your website preview will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+        let uploadedFiles = [];
+
+        // Handle file upload
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            uploadedFiles = Array.from(e.target.files);
+            displayUploadedFiles();
+        });
+
+        function displayUploadedFiles() {
+            const container = document.getElementById('uploadedFiles');
+            container.innerHTML = uploadedFiles.map(file =>
+                `<span class="file-tag">📎 ${file.name}</span>`
+            ).join('');
+        }
+
+        // Handle form submission
+        document.getElementById('generateForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const prompt = document.getElementById('prompt').value;
+            const generateBtn = document.getElementById('generateBtn');
+            const progress = document.getElementById('progress');
+            const status = document.getElementById('status');
+            const resultActions = document.getElementById('resultActions');
+
+            // Disable button and show progress
+            generateBtn.disabled = true;
+            progress.style.display = 'block';
+            resultActions.classList.remove('show');
+
+            // Update status messages
+            const statusMessages = [
+                'Analyzing your request...',
+                'Understanding Agent processing...',
+                'Design Agent creating layout...',
+                'Code Agent generating HTML/CSS/JS...',
+                'QA Agent testing website...',
+                'Deployment Agent packaging files...',
+                'Almost ready...'
+            ];
+
+            let msgIndex = 0;
+            const statusInterval = setInterval(() => {
+                status.textContent = statusMessages[msgIndex % statusMessages.length];
+                msgIndex++;
+            }, 3000);
+
+            try {
+                // Prepare form data
+                const formData = new FormData();
+                formData.append('prompt', prompt);
+
+                // Add files
+                uploadedFiles.forEach(file => {
+                    formData.append('files', file);
+                });
+
+                // Make API request
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                clearInterval(statusInterval);
+
+                if (data.success) {
+                    currentSessionId = data.session_id;
+                    status.textContent = `✓ Website generated successfully! (Score: ${data.qa_score.toFixed(1)}/100)`;
+
+                    // Show preview
+                    const previewEl = document.getElementById('preview');
+                    previewEl.innerHTML = `<iframe src="${data.preview_url}"></iframe>`;
+
+                    // Show download button
+                    resultActions.classList.add('show');
+                } else {
+                    status.textContent = `✗ Error: ${data.error}`;
+                }
+
+            } catch (error) {
+                clearInterval(statusInterval);
+                status.textContent = `✗ Error: ${error.message}`;
+            } finally {
+                generateBtn.disabled = false;
+            }
+        });
+
+        function downloadWebsite() {
+            if (currentSessionId) {
+                window.location.href = `/api/download/${currentSessionId}`;
+            }
+        }
+    </script>
+</body>
+</html>

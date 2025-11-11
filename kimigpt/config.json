@@ -1,0 +1,217 @@
+{
+  "app": {
+    "name": "KimiGPT",
+    "version": "1.0.0",
+    "description": "Multi-Agent AI Website Builder",
+    "author": "KimiGPT Team"
+  },
+  "api_providers": {
+    "anthropic": {
+      "name": "Anthropic Claude",
+      "priority": 1,
+      "models": ["claude-3-5-sonnet-20241022", "claude-3-opus-20240229"],
+      "default_model": "claude-3-5-sonnet-20241022",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "rate_limit": 50,
+      "supports": ["text", "image", "code"]
+    },
+    "gemini": {
+      "name": "Google Gemini",
+      "priority": 2,
+      "models": ["gemini-1.5-pro", "gemini-1.5-flash"],
+      "default_model": "gemini-1.5-flash",
+      "max_tokens": 8192,
+      "temperature": 0.7,
+      "rate_limit": 60,
+      "supports": ["text", "image", "video", "audio"]
+    },
+    "groq": {
+      "name": "Groq",
+      "priority": 3,
+      "models": ["llama-3.1-70b-versatile", "mixtral-8x7b-32768"],
+      "default_model": "llama-3.1-70b-versatile",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "rate_limit": 14400,
+      "supports": ["text", "code"]
+    },
+    "deepseek": {
+      "name": "DeepSeek Coder",
+      "priority": 4,
+      "models": ["deepseek-coder", "deepseek-chat"],
+      "default_model": "deepseek-coder",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "rate_limit": 100,
+      "supports": ["code"]
+    },
+    "openrouter": {
+      "name": "OpenRouter",
+      "priority": 5,
+      "models": ["openai/gpt-3.5-turbo", "anthropic/claude-instant-v1"],
+      "default_model": "openai/gpt-3.5-turbo",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "rate_limit": 60,
+      "supports": ["text", "code"]
+    },
+    "mistral": {
+      "name": "Mistral AI",
+      "priority": 6,
+      "models": ["mistral-medium", "mistral-small"],
+      "default_model": "mistral-small",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "rate_limit": 60,
+      "supports": ["text", "code"]
+    }
+  },
+  "agents": {
+    "orchestrator": {
+      "name": "Master Orchestrator",
+      "description": "Coordinates all agents and manages workflow",
+      "preferred_api": "anthropic"
+    },
+    "understanding": {
+      "name": "Understanding Agent",
+      "description": "Processes and understands user requirements",
+      "preferred_api": "gemini"
+    },
+    "design": {
+      "name": "Design Agent",
+      "description": "Creates UI/UX designs and color schemes",
+      "preferred_api": "anthropic"
+    },
+    "code": {
+      "name": "Code Generation Agent",
+      "description": "Generates HTML/CSS/JavaScript code",
+      "preferred_api": "deepseek"
+    },
+    "image": {
+      "name": "Image Processing Agent",
+      "description": "Processes and optimizes images",
+      "preferred_api": "gemini"
+    },
+    "content": {
+      "name": "Content Agent",
+      "description": "Generates website content and copy",
+      "preferred_api": "anthropic"
+    },
+    "qa": {
+      "name": "Quality Assurance Agent",
+      "description": "Tests and validates generated code",
+      "preferred_api": "groq"
+    },
+    "deployment": {
+      "name": "Deployment Agent",
+      "description": "Packages and deploys websites",
+      "preferred_api": "groq"
+    }
+  },
+  "templates": {
+    "website_types": [
+      "portfolio",
+      "business",
+      "ecommerce",
+      "blog",
+      "landing_page",
+      "restaurant",
+      "photography",
+      "agency",
+      "saas",
+      "personal"
+    ],
+    "color_schemes": [
+      "modern",
+      "professional",
+      "vibrant",
+      "minimal",
+      "dark",
+      "light",
+      "pastel",
+      "bold"
+    ],
+    "layouts": [
+      "single_page",
+      "multi_page",
+      "sidebar",
+      "grid",
+      "masonry",
+      "full_width"
+    ]
+  },
+  "features": {
+    "animations": {
+      "enabled": true,
+      "libraries": ["gsap", "aos", "intersection-observer"]
+    },
+    "responsive": {
+      "breakpoints": {
+        "mobile": 375,
+        "tablet": 768,
+        "desktop": 1024,
+        "wide": 1440
+      }
+    },
+    "seo": {
+      "enabled": true,
+      "auto_meta": true,
+      "schema_markup": true,
+      "sitemap": true
+    },
+    "accessibility": {
+      "enabled": true,
+      "wcag_level": "AA",
+      "auto_alt_text": true
+    },
+    "pwa": {
+      "enabled": false,
+      "service_worker": true,
+      "manifest": true
+    }
+  },
+  "optimization": {
+    "html": {
+      "minify": true,
+      "remove_comments": true
+    },
+    "css": {
+      "minify": true,
+      "autoprefixer": true
+    },
+    "javascript": {
+      "minify": true,
+      "es6": true
+    },
+    "images": {
+      "optimize": true,
+      "webp_conversion": true,
+      "lazy_loading": true,
+      "max_width": 1920,
+      "quality": 85
+    }
+  },
+  "deployment_options": [
+    {
+      "name": "Netlify",
+      "enabled": true,
+      "auto_deploy": true
+    },
+    {
+      "name": "Vercel",
+      "enabled": true,
+      "auto_deploy": true
+    },
+    {
+      "name": "GitHub Pages",
+      "enabled": true,
+      "auto_deploy": false
+    },
+    {
+      "name": "FTP",
+      "enabled": true,
+      "auto_deploy": false
+    }
+  ]
+}
