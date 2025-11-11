@@ -89,29 +89,25 @@ echo.
 set PORT=5000
 for /f "tokens=2 delims==" %%a in ('findstr "FLASK_PORT" .env 2^>nul') do set PORT=%%a
 
-:: Launch Main Application
-echo ✓ All services started!
+:: Display ready message and launch
 echo.
 echo ╔════════════════════════════════════════════════╗
-echo ║         KIMIGPT IS READY! 🚀                    ║
+echo ║         STARTING KIMIGPT... 🚀                  ║
 echo ║                                                 ║
+echo ║  After server starts (2-3 seconds):            ║
 echo ║  Dashboard:    http://localhost:%PORT%
 echo ║  Generator:    http://localhost:%PORT%/generate
 echo ║  API Status:   http://localhost:%PORT%/api/status
 echo ║                                                 ║
+echo ║  Browser will open automatically in 5 seconds  ║
 echo ║  Press Ctrl+C to stop the server               ║
 echo ╚════════════════════════════════════════════════╝
 echo.
 
-:: Open browser automatically (optional)
-set /p OPEN_BROWSER="Open browser automatically? (y/n): "
-if /i "%OPEN_BROWSER%"=="y" (
-    timeout /t 2 >nul
-    start http://localhost:%PORT%
-)
+:: Open browser after delay (gives Flask time to start)
+start "" cmd /c "timeout /t 5 /nobreak >nul && start http://localhost:%PORT%"
 
-:: Start the application
-echo.
+:: Start the Flask application (foreground so we can see logs)
 echo [📊] Server Logs:
 echo ════════════════════════════════════════════════
 echo.
