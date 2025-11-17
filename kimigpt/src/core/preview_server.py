@@ -10,8 +10,12 @@ from flask_cors import CORS
 
 logger = logging.getLogger(__name__)
 
+# Get absolute paths
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+TEMP_DIR = os.path.join(BASE_DIR, 'temp')
+
 # Create preview app
-preview_app = Flask(__name__, static_folder='../../temp')
+preview_app = Flask(__name__, static_folder=TEMP_DIR)
 CORS(preview_app)
 
 
@@ -19,7 +23,7 @@ CORS(preview_app)
 @preview_app.route('/preview/<session_id>/<path:filename>')
 def serve_preview(session_id, filename='index.html'):
     """Serve preview files for a session"""
-    preview_dir = os.path.join('temp', session_id)
+    preview_dir = os.path.join(TEMP_DIR, session_id)
 
     if not os.path.exists(preview_dir):
         return "Preview not found", 404

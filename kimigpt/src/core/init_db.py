@@ -9,9 +9,16 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
+# Get absolute path to database
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+DEFAULT_DB_PATH = os.path.join(BASE_DIR, "database", "kimigpt.db")
 
-def init_database(db_path="database/kimigpt.db"):
+
+def init_database(db_path=None):
     """Initialize SQLite database"""
+    if db_path is None:
+        db_path = DEFAULT_DB_PATH
+
     logger.info("Initializing database...")
 
     # Ensure database directory exists

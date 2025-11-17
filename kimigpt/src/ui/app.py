@@ -9,8 +9,9 @@ import logging
 import uuid
 import json
 import zipfile
+import mimetypes
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, make_response
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
@@ -19,6 +20,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..'))
 
 from src.core.multi_agent_system import get_multi_agent_system
 from src.api.api_manager import get_api_manager
+from src.core.init_db import init_database
 from dotenv import load_dotenv
 
 # Load environment
@@ -46,11 +48,27 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(GENERATED_FOLDER, exist_ok=True)
 os.makedirs(TEMP_FOLDER, exist_ok=True)
 
+# Initialize database
+try:
+    init_database()
+    logger.info("✓ Database initialized")
+except Exception as e:
+    logger.error(f"Failed to initialize database: {e}")
+
 # Initialize multi-agent system
 try:
     multi_agent_system = get_multi_agent_system()
     api_manager = get_api_manager()
     logger.info("✓ Multi-Agent System initialized")
+
+    # Warn if no API keys are configured
+    if not api_manager or not api_manager.providers:
+        logger.warning("⚠️ WARNING: No API keys configured! The app will not be able to generate content.")
+        logger.warning("⚠️ Please add at least one API key to the .env file:")
+        logger.warning("   - GROQ_API_KEY (recommended - fastest, 14,400 req/day free)")
+        logger.warning("   - GEMINI_API_KEY (Google Gemini - 60 req/min free)")
+        logger.warning("   - HUGGINGFACE_API_KEY (unlimited free)")
+        logger.warning("   - COHERE_API_KEY (100 req/min free)")
 except Exception as e:
     logger.error(f"Failed to initialize system: {e}")
     multi_agent_system = None
@@ -84,6 +102,17 @@ def api_generate():
             files = request.files.getlist('files')
             for file in files:
                 if file.filename:
+                    # Check file size
+                    file.seek(0, os.SEEK_END)
+                    file_size = file.tell()
+                    file.seek(0)  # Reset file pointer
+
+                    if file_size > MAX_UPLOAD_SIZE:
+                        return jsonify({
+                            'success': False,
+                            'error': f'File {file.filename} exceeds size limit of {MAX_UPLOAD_SIZE / (1024 * 1024):.0f}MB'
+                        }), 400
+
                     filename = secure_filename(file.filename)
                     file_path = os.path.join(UPLOAD_FOLDER, filename)
                     file.save(file_path)
@@ -192,6 +221,11 @@ def api_download(session_id):
 @app.route('/preview/<session_id>/<path:filename>')
 def serve_preview(session_id, filename='index.html'):
     """Serve preview files"""
+    # Prevent path traversal attacks
+    filename = filename.replace('..', '').replace('//', '/')
+    if filename.startswith('/'):
+        filename = filename[1:]
+
     preview_dir = os.path.join(TEMP_FOLDER, session_id)
 
     if not os.path.exists(preview_dir):
@@ -199,10 +233,20 @@ def serve_preview(session_id, filename='index.html'):
 
     try:
         file_path = os.path.join(preview_dir, filename)
+
+        # Ensure file is within preview directory
+        if not os.path.abspath(file_path).startswith(os.path.abspath(preview_dir)):
+            return "Invalid file path", 403
+
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-            return content
+
+            # Set proper content type
+            content_type = mimetypes.guess_type(file_path)[0] or 'text/plain'
+            response = make_response(content)
+            response.headers['Content-Type'] = content_type
+            return response
         else:
             return "File not found", 404
     except Exception as e:

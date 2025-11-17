@@ -10,7 +10,6 @@ import logging
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timedelta
 from collections import defaultdict
-import asyncio
 
 from dotenv import load_dotenv
 
@@ -43,6 +42,7 @@ class APIManager:
         self.last_request_time = {}
         self.cache = {}
         self.cache_ttl = int(os.getenv("API_CACHE_TTL", 3600))
+        self.max_cache_size = 100  # Maximum number of cached responses
 
         # Initialize API providers
         self._initialize_providers()
@@ -124,7 +124,24 @@ class APIManager:
         return None
 
     def _store_cache(self, cache_key: str, response: Any):
-        """Store response in cache"""
+        """Store response in cache with size limit"""
+        # Clean up expired entries first
+        current_time = time.time()
+        self.cache = {
+            k: v for k, v in self.cache.items()
+            if current_time - v["timestamp"] < self.cache_ttl
+        }
+
+        # If cache is still too large, remove oldest entries
+        if len(self.cache) >= self.max_cache_size:
+            # Sort by timestamp and keep only the newest entries
+            sorted_cache = sorted(
+                self.cache.items(),
+                key=lambda x: x[1]["timestamp"],
+                reverse=True
+            )
+            self.cache = dict(sorted_cache[:self.max_cache_size - 1])
+
         self.cache[cache_key] = {
             "response": response,
             "timestamp": time.time()
